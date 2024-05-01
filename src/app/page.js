@@ -114,11 +114,6 @@ export default function Home() {
         items={items}
         className=""
       />
-      <section className="flex h-screen  py-12 text-white">
-        <div className="mx-auto w-full max-w-7xl px-6">
-          <Columns />
-        </div>
-      </section>
     </>
   );
 }

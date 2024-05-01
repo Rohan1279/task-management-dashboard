@@ -4,25 +4,27 @@ import { useTaskStore } from "../lib/store";
 import Task from "./task";
 import { useEffect, useMemo, useState } from "react";
 
-export default function Column({ title, status }) {
-  const tasks = useTaskStore((state) => state.tasks);
+export default function Column({ title, status, projectId }) {
+  const projects = useTaskStore((state) => state.projects);
+  const tasks = projects.find((project) => project.id === projectId).tasks;
 
-  const store = useTaskStore();
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const editTask = useTaskStore((state) => state.editTask);
   const draggedTask = useTaskStore((state) => state.draggedTask);
+  console.log(draggedTask);
 
   const dragTask = useTaskStore((state) => state.dragTask);
   // recalculates filteredTasks only if tasks/status state changes
-  const prevfilteredTasks = useMemo(
+  const filteredTasks = useMemo(
     () => tasks.filter((task) => task.status === status),
     [tasks, status]
   );
-  const [filteredTasks, setFilteredTasks] = useState(prevfilteredTasks);
 
-  useEffect(() => {
-    setFilteredTasks(prevfilteredTasks);
-  }, [prevfilteredTasks]);
+  // const [filteredTasks, setFilteredTasks] = useState(prevfilteredTasks);
+
+  // useEffect(() => {
+  //   setFilteredTasks(prevfilteredTasks);
+  // }, [prevfilteredTasks]);
 
   const handleDrop = (e) => {
     if (!draggedTask) return;
@@ -44,7 +46,10 @@ export default function Column({ title, status }) {
         onDragOver={(e) => e.preventDefault()}
       >
         <div className="flex flex-col gap-y-4">
-          <Reorder.Group values={filteredTasks} onReorder={setFilteredTasks}>
+          <Reorder.Group
+            values={filteredTasks}
+            //  onReorder={setFilteredTasks}
+          >
             {filteredTasks.map((task) => (
               <Reorder.Item value={task} key={task.id} className="mb-4">
                 <Task {...task} />
