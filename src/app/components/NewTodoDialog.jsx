@@ -10,6 +10,7 @@ export default function NewTodoDialog() {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
+  const [form] = Form.useForm();
   const showModal = () => {
     setOpen(true);
   };
@@ -17,12 +18,14 @@ export default function NewTodoDialog() {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
     setTimeout(() => {
+      form.resetFields();
       setOpen(false);
       setConfirmLoading(false);
     }, 500);
   };
   const handleCancel = () => {
     console.log("Clicked cancel button");
+    // form.resetFields();
     setOpen(false);
   };
   const onFinish = (values) => {
@@ -30,6 +33,7 @@ export default function NewTodoDialog() {
     const description = values.description;
     if (typeof title !== "string" || typeof description !== "string") return;
     addNewTask(title, description);
+    form.resetFields();
     setOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
@@ -37,31 +41,19 @@ export default function NewTodoDialog() {
   };
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={showModal} className="">
         Add New Task
       </Button>
       <Modal
         title="Add new todo"
         open={open}
-        onOk={handleOk}
+        // onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[]}
       >
         <Form
-          name="basic"
-          // labelCol={{
-          //   span: 8,
-          // }}
-          // wrapperCol={{
-          //   span: 16,
-          // }}
-          // style={{
-          //   maxWidth: 600,
-          // }}
-          // initialValues={{
-          //   remember: true,
-          // }}
+          name="task-form"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -72,7 +64,7 @@ export default function NewTodoDialog() {
             name="title"
             rules={[
               {
-                required: false,
+                required: true,
                 message: "Enter the title of the task",
               },
             ]}
@@ -93,13 +85,13 @@ export default function NewTodoDialog() {
             <Input.TextArea rows={4} />
           </Form.Item>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
+          <Form.Item>
+            {/* <Button htmlType="reset">Reset</Button> */}
+            <Button
+              type="primary"
+              htmlType="submit"
+              // onClick={() => form.resetFields()}
+            >
               Submit
             </Button>
           </Form.Item>

@@ -6,7 +6,7 @@ export default function Task({ id, title, description, status }) {
 
   return (
     <div
-      className="flex cursor-move items-start justify-between rounded-lg bg-white px-3 py-2 text-gray-900"
+      className="flex cursor-move items-start justify-between rounded-lg border px-3 py-2 text-gray-900"
       onDragStart={() => dragTask(id)}
       draggable
     >

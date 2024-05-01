@@ -36,10 +36,10 @@ export default function Column({ title, status }) {
 
   return (
     <section className="h-[600px] flex-1">
-      <h2 className="ml-1 text-2xl font-semibold">{title}</h2>
+      <h2 className="ml-1 text-2xl font-semibold text-gray-700">{title}</h2>
 
       <div
-        className="mt-3.5 h-full w-full rounded-xl bg-gray-700/50 p-4"
+        className="mt-3.5 h-full w-full rounded-xl shadow-md p-4"
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
