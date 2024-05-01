@@ -36,17 +36,17 @@ export default function Column({ title, status }) {
 
   return (
     <section className="h-[600px] flex-1">
-      <h2 className="ml-1 font-serif text-2xl font-semibold">{title}</h2>
+      <h2 className="ml-1 text-2xl font-semibold">{title}</h2>
 
       <div
         className="mt-3.5 h-full w-full rounded-xl bg-gray-700/50 p-4"
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-y-4">
           <Reorder.Group values={filteredTasks} onReorder={setFilteredTasks}>
             {filteredTasks.map((task) => (
-              <Reorder.Item value={task} key={task.id}>
+              <Reorder.Item value={task} key={task.id} className="mb-4">
                 <Task {...task} />
               </Reorder.Item>
             ))}

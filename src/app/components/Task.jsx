@@ -7,8 +7,8 @@ export default function Task({ id, title, description, status }) {
   return (
     <div
       className="flex cursor-move items-start justify-between rounded-lg bg-white px-3 py-2 text-gray-900"
-      // onDragStart={() => dragTask(id)}
-      // draggable
+      onDragStart={() => dragTask(id)}
+      draggable
     >
       <div>
         <h3 className="font-medium text-gray-700">{title}</h3>
