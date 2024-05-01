@@ -78,7 +78,7 @@ export const useTaskStore = create(
           name: "👨🏻‍🦲 micheal",
         },
         {
-          name: "👩🏻‍🦰    robin",
+          name: "👩🏻‍🦰 robin",
         },
       ],
       deleteProject: (id) =>
@@ -101,6 +101,15 @@ export const useTaskStore = create(
             },
           ],
         })),
+      updateProject: (id, title, description, members) =>
+        set((state) => ({
+          projects: state.projects.map((project) =>
+            project.id === id
+              ? { ...project, title, description, members }
+              : project
+          ),
+        })),
+
       addNewTask: (
         projectId,
         title,
@@ -152,6 +161,6 @@ export const useTaskStore = create(
           })),
         })),
     }),
-    { name: "task-store", skipHydration: true } // server doesn't have access to localStorage
+    { name: "task-store", skipHydration: false } // server doesn't have access to localStorage
   )
 );

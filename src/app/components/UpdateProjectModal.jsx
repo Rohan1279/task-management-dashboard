@@ -5,19 +5,22 @@ import { useTaskStore } from "../lib/store";
 import { Button, Modal, Input, Form, Select, Tag, DatePicker } from "antd";
 const { TextArea } = Input;
 
-export default function NewProjectModal({ open, setOpen }) {
-  const addNewProject = useTaskStore((state) => state.addNewProject);
+export default function UpdateProjectModal({ projectId, open, setOpen }) {
+  const updateProject = useTaskStore((state) => state.updateProject);
 
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
   const [form] = Form.useForm();
-
+  const projects = useTaskStore((state) => state.projects);
+  const selectedProject = projects.find((project) => project.id === projectId);
+  console.log(selectedProject);
   const handleCancel = () => {
     console.log("Clicked cancel button");
     // form.resetFields();
     setOpen(false);
   };
   const onFinish = (values) => {
+    console.log(values);
+
     const title = values.title;
     const description = values.description;
     const members = values.members;
@@ -26,7 +29,7 @@ export default function NewProjectModal({ open, setOpen }) {
       return;
     }
 
-    addNewProject(title, description, members);
+    updateProject(projectId, title, description, members);
     form.resetFields();
     setOpen(false);
   };
@@ -75,6 +78,7 @@ export default function NewProjectModal({ open, setOpen }) {
         footer={[]}
       >
         <Form
+          initialValues={selectedProject}
           name="project-form"
           form={form}
           onFinish={onFinish}
@@ -105,7 +109,7 @@ export default function NewProjectModal({ open, setOpen }) {
               },
             ]}
           >
-            <Input.TextArea rows={4} />
+            <Input.TextArea i rows={4} />
           </Form.Item>
           <Form.Item
             rules={[
@@ -126,6 +130,7 @@ export default function NewProjectModal({ open, setOpen }) {
               placeholder="Please select"
               onChange={handleChange}
               options={options}
+              defaultValue={selectedProject?.members}
             />
           </Form.Item>
           <Form.Item>
