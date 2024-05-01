@@ -52,12 +52,19 @@ const Navbar = () => {
         {
           label: "Add Task",
           icon: <EditOutlined />,
+          children: projects.map((project) => ({
+            label: project.title,
+            key: project.id,
+            onClick: () => {
+              router.push(`/projects/${project.id}`);
+            },
+          })),
         },
 
         {
           label: "Add User",
           onClick: () => {
-            console.log("Add User");
+            // console.log("Add User");
           },
           icon: <UserOutlined />,
         },

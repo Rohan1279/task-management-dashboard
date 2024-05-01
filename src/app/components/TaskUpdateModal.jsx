@@ -5,31 +5,35 @@ import { useTaskStore } from "../lib/store";
 import { Button, Modal, Input, Form, Select, Tag, DatePicker } from "antd";
 const { TextArea } = Input;
 
-export default function NewTodoDialog({ projectId }) {
-  const addNewTask = useTaskStore((state) => state.addNewTask);
-  const projects = useTaskStore((state) => state.projects);
-  const selectedProject = projects.find((project) => project.id === projectId);
-  // console.log(selectedProject);
-  const [open, setOpen] = useState(false);
+export default function TaskUpdateModal({ ...props }) {
+  const {
+    id,
+    title,
+    description,
+    status,
+    priority,
+    tags,
+    deadline,
+    assignee,
+    isOpen,
+    setIsOpen,
+  } = props;
+
+  console.log(props);
+
+  //   console.log(selectedProject);
+
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
   const [form] = Form.useForm();
   const showModal = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      form.resetFields();
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 500);
-  };
+  const updateTask = useTaskStore((state) => state.updateTask);
   const handleCancel = () => {
     // console.log("Clicked cancel button");
     // form.resetFields();
-    setOpen(false);
+    setIsOpen(false);
   };
   const onFinish = (values) => {
     // console.log(values);
@@ -39,6 +43,7 @@ export default function NewTodoDialog({ projectId }) {
     const priority = values.priority;
     const tags = values.tags;
     const deadline = values.deadline;
+
     const assignee = values.assignee;
     const status = values.status;
 
@@ -54,8 +59,8 @@ export default function NewTodoDialog({ projectId }) {
       return;
     }
 
-    addNewTask(
-      projectId,
+    updateTask(
+      id,
       title,
       description,
       priority,
@@ -65,7 +70,7 @@ export default function NewTodoDialog({ projectId }) {
       status
     );
     form.resetFields();
-    setOpen(false);
+    setIsOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
@@ -115,19 +120,17 @@ export default function NewTodoDialog({ projectId }) {
     );
   };
   return (
-    <div>
-      <Button type="primary" onClick={showModal} className="">
-        Add New Task
-      </Button>
+    <>
       <Modal
         title="Add new todo"
-        open={open}
+        open={isOpen}
         // onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[]}
       >
         <Form
+          initialValues={props}
           name="task-form"
           form={form}
           onFinish={onFinish}
@@ -183,16 +186,7 @@ export default function NewTodoDialog({ projectId }) {
               options={options}
             />
           </Form.Item>
-          <Form.Item
-            label="Deadline"
-            name="deadline"
-            rules={[
-              {
-                required: false,
-                message: "Please input!",
-              },
-            ]}
-          >
+          <Form.Item label="Deadline" name="deadline">
             <DatePicker />
           </Form.Item>
           <Form.Item label="Assignee" name="assignee">
@@ -202,10 +196,10 @@ export default function NewTodoDialog({ projectId }) {
                 width: 200,
               }}
               // onChange={handleChange}
-              options={selectedProject?.members.map((member) => ({
-                value: member,
-                label: member,
-              }))}
+              //   options={assignee.map((member) => ({
+              //     value: member,
+              //     label: member,
+              //   }))}
             />
           </Form.Item>
           <Form.Item label="Status" name="status">
@@ -247,6 +241,6 @@ export default function NewTodoDialog({ projectId }) {
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+    </>
   );
 }

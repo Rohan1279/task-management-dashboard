@@ -17,7 +17,7 @@ import UpdateProjectModal from "../components/UpdateProjectModal";
 
 const page = () => {
   const projects = useTaskStore((state) => state.projects);
-  console.log(projects);
+  //   console.log(projects);
   const deleteProject = useTaskStore((state) => state.deleteProject);
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);

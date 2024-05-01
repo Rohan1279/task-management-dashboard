@@ -6,9 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function Column({ title, status, projectId }) {
   const projects = useTaskStore((state) => state.projects);
-  const tasks = projects.find((project) => project.id === projectId).tasks;
-
-  console.log(tasks);
+  const tasks = projects.find((project) => project.id === projectId)?.tasks;
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const editTask = useTaskStore((state) => state.editTask);
   const draggedTask = useTaskStore((state) => state.draggedTask);
@@ -16,7 +14,7 @@ export default function Column({ title, status, projectId }) {
   const dragTask = useTaskStore((state) => state.dragTask);
   // recalculates filteredTasks only if tasks/status state changes
   const filteredTasks = useMemo(
-    () => tasks.filter((task) => task.status === status),
+    () => tasks?.filter((task) => task.status === status),
     [tasks, status]
   );
 
@@ -37,7 +35,7 @@ export default function Column({ title, status, projectId }) {
   }, []);
 
   return (
-    <section className="h-[600px] flex-1 font-comfortaa">
+    <section className="h-full md:h-[600px] flex-1 font-comfortaa">
       <h2 className="ml-1 text-2xl font-semibold text-gray-700">{title}</h2>
 
       <div
@@ -50,20 +48,20 @@ export default function Column({ title, status, projectId }) {
             values={filteredTasks}
             //  onReorder={setFilteredTasks}
           >
-            {filteredTasks.map((task) => (
+            {filteredTasks?.map((task) => (
               <Reorder.Item value={task} key={task.id} className="mb-4">
                 <Task {...task} />
               </Reorder.Item>
             ))}
           </Reorder.Group>
 
-          {filteredTasks.length === 0 && status === "TODO" && (
+          {filteredTasks?.length === 0 && status === "TODO" && (
             <div className="mt-8 text-center text-sm text-gray-500">
               <p>Create a new task</p>
             </div>
           )}
 
-          {tasks.length && filteredTasks.length === 0 && status !== "TODO" ? (
+          {tasks?.length && filteredTasks?.length === 0 && status !== "TODO" ? (
             <div className="mt-8 text-center text-sm text-gray-500">
               <p>Drag your tasks here</p>
             </div>

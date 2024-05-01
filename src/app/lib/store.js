@@ -160,6 +160,36 @@ export const useTaskStore = create(
             ),
           })),
         })),
+
+      updateTask: (
+        id,
+        title,
+        description,
+        priority,
+        tags,
+        deadline,
+        assignee,
+        status
+      ) =>
+        set((state) => ({
+          projects: state.projects.map((project) => ({
+            ...project,
+            tasks: project.tasks.map((task) =>
+              task.id === id
+                ? {
+                    ...task,
+                    title,
+                    description,
+                    priority,
+                    tags,
+                    deadline,
+                    assignee,
+                    status,
+                  }
+                : task
+            ),
+          })),
+        })),
     }),
     { name: "task-store", skipHydration: false } // server doesn't have access to localStorage
   )

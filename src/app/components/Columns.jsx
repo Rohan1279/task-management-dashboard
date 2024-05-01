@@ -1,8 +1,11 @@
 import React from "react";
 import NewTodoDialog from "./NewTodoDialog";
 import Column from "./Column";
+import { useTaskStore } from "../lib/store";
 
 const Columns = ({ projectId }) => {
+  const projects = useTaskStore((state) => state.projects);
+  const selectedProject = projects.find((project) => project.id === projectId);
   // {
   //   value: "todo",
   //   label: "To Do ",
@@ -21,6 +24,7 @@ const Columns = ({ projectId }) => {
   // },
   return (
     <div>
+      <h1>{selectedProject?.title}</h1>
       <NewTodoDialog projectId={projectId} />
       <section className="mt-10 flex gap-6 lg:gap-12">
         <Column projectId={projectId} title="Todo" status="todo" />

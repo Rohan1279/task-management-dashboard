@@ -13,7 +13,7 @@ export default function NewProjectModal({ open, setOpen }) {
   const [form] = Form.useForm();
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
+    // console.log("Clicked cancel button");
     // form.resetFields();
     setOpen(false);
   };
@@ -31,7 +31,7 @@ export default function NewProjectModal({ open, setOpen }) {
     setOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   const options = [
@@ -62,7 +62,7 @@ export default function NewProjectModal({ open, setOpen }) {
   ];
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
   return (
     <div>

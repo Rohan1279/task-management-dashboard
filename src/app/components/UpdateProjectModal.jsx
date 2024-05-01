@@ -12,14 +12,14 @@ export default function UpdateProjectModal({ projectId, open, setOpen }) {
   const [form] = Form.useForm();
   const projects = useTaskStore((state) => state.projects);
   const selectedProject = projects.find((project) => project.id === projectId);
-  console.log(selectedProject);
+  //   console.log(selectedProject);
   const handleCancel = () => {
-    console.log("Clicked cancel button");
+    // console.log("Clicked cancel button");
     // form.resetFields();
     setOpen(false);
   };
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
 
     const title = values.title;
     const description = values.description;
@@ -34,7 +34,7 @@ export default function UpdateProjectModal({ projectId, open, setOpen }) {
     setOpen(false);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   const options = [
@@ -65,7 +65,7 @@ export default function UpdateProjectModal({ projectId, open, setOpen }) {
   ];
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
   return (
     <div>
@@ -140,7 +140,7 @@ export default function UpdateProjectModal({ projectId, open, setOpen }) {
               htmlType="submit"
               // onClick={() => form.resetFields()}
             >
-              Submit
+              Save
             </Button>
           </Form.Item>
         </Form>
