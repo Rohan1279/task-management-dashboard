@@ -159,17 +159,33 @@ export const useTaskStore = create(
       ],
       tasks: [],
       draggedTask: null,
-      addNewTask: (title, description) =>
+      addNewTask: (projectId, title, description) =>
         set((state) => ({
-          tasks: [
-            ...state.tasks,
-            { id: uuid(), title, description, status: "TODO" },
-          ],
+          projects: state.projects.map((project) => {
+            if (project.id === projectId) {
+              return {
+                ...project,
+                tasks: [
+                  ...project.tasks,
+                  {
+                    id: uuid(),
+                    title,
+                    description,
+                    status: "TODO",
+                  },
+                ],
+              };
+            }
+            return project;
+          }),
         })),
       dragTask: (id) => set({ draggedTask: id }),
       deleteTask: (id) =>
         set((state) => ({
-          tasks: state.tasks.filter((task) => task.id !== id),
+          projects: state.projects.map((project) => ({
+            ...project,
+            tasks: project.tasks.filter((task) => task.id !== id),
+          })),
         })),
       editTask: (id, status) =>
         set((state) => ({

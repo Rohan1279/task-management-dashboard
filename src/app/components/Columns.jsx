@@ -5,7 +5,7 @@ import Column from "./Column";
 const Columns = ({ projectId }) => {
   return (
     <div>
-      <NewTodoDialog />
+      <NewTodoDialog projectId={projectId} />
       <section className="mt-10 flex gap-6 lg:gap-12">
         <Column projectId={projectId} title="Todo" status="TODO" />
         <Column

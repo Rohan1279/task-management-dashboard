@@ -11,7 +11,6 @@ export default function Column({ title, status, projectId }) {
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const editTask = useTaskStore((state) => state.editTask);
   const draggedTask = useTaskStore((state) => state.draggedTask);
-  console.log(draggedTask);
 
   const dragTask = useTaskStore((state) => state.dragTask);
   // recalculates filteredTasks only if tasks/status state changes

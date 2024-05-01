@@ -5,7 +5,7 @@ import { useTaskStore } from "../lib/store";
 import { Button, Modal, Input, Form } from "antd";
 const { TextArea } = Input;
 
-export default function NewTodoDialog() {
+export default function NewTodoDialog({ projectId }) {
   const addNewTask = useTaskStore((state) => state.addNewTask);
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -32,7 +32,7 @@ export default function NewTodoDialog() {
     const title = values.title;
     const description = values.description;
     if (typeof title !== "string" || typeof description !== "string") return;
-    addNewTask(title, description);
+    addNewTask(projectId, title, description);
     form.resetFields();
     setOpen(false);
   };
