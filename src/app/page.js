@@ -3,11 +3,13 @@ import Image from "next/image";
 import Columns from "./components/Columns";
 import { Button, Dropdown, Menu, Tabs } from "antd";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [current, setCurrent] = useState("mail");
+  const router = useRouter();
   const onClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
     setCurrent(e.key);
   };
   const addTab = [
@@ -53,6 +55,9 @@ export default function Home() {
     {
       label: "Dashboard",
       key: "dashboard",
+      onClick: () => {
+        router.push("/dashboard");
+      },
     },
     {
       label: "Projects",
@@ -65,6 +70,7 @@ export default function Home() {
         {
           // type: "group",
           label: "Add Task",
+
           // children: [
           //   {
           //     label: "Option 1",
@@ -92,6 +98,9 @@ export default function Home() {
         },
         {
           label: "Add User",
+          onClick: () => {
+            console.log("Add User");
+          },
         },
       ],
     },
@@ -103,6 +112,7 @@ export default function Home() {
         selectedKeys={[current]}
         mode="horizontal"
         items={items}
+        className=""
       />
       <section className="flex h-screen  py-12 text-white">
         <div className="mx-auto w-full max-w-7xl px-6">

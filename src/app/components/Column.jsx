@@ -35,7 +35,7 @@ export default function Column({ title, status }) {
   }, []);
 
   return (
-    <section className="h-[600px] flex-1">
+    <section className="h-[600px] flex-1 font-comfortaa">
       <h2 className="ml-1 text-2xl font-semibold text-gray-700">{title}</h2>
 
       <div
