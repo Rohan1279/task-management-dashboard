@@ -8,6 +8,7 @@ export default function Column({ title, status, projectId }) {
   const projects = useTaskStore((state) => state.projects);
   const tasks = projects.find((project) => project.id === projectId).tasks;
 
+  console.log(tasks);
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const editTask = useTaskStore((state) => state.editTask);
   const draggedTask = useTaskStore((state) => state.draggedTask);

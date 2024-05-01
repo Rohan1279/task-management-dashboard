@@ -4,14 +4,9 @@ import Columns from "./components/Columns";
 import { Button, Dropdown, Menu, Tabs } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
-  const [current, setCurrent] = useState("mail");
-  const router = useRouter();
-  const onClick = (e) => {
-    // console.log("click ", e);
-    setCurrent(e.key);
-  };
   const addTab = [
     {
       key: "1",
@@ -51,69 +46,9 @@ export default function Home() {
     },
   ];
 
-  const items = [
-    {
-      label: "Dashboard",
-      key: "dashboard",
-      onClick: () => {
-        router.push("/dashboard");
-      },
-    },
-    {
-      label: "Projects",
-      key: "projects",
-    },
-    {
-      label: "Add",
-      key: "add",
-      children: [
-        {
-          // type: "group",
-          label: "Add Task",
-
-          // children: [
-          //   {
-          //     label: "Option 1",
-          //     key: "setting:1",
-          //   },
-          //   {
-          //     label: "Option 2",
-          //     key: "setting:2",
-          //   },
-          // ],
-        },
-        {
-          // type: "group",
-          label: "Add Project",
-          // children: [
-          //   {
-          //     label: "Option 3",
-          //     key: "setting:3",
-          //   },
-          //   {
-          //     label: "Option 4",
-          //     key: "setting:4",
-          //   },
-          // ],
-        },
-        {
-          label: "Add User",
-          onClick: () => {
-            console.log("Add User");
-          },
-        },
-      ],
-    },
-  ];
   return (
     <>
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={items}
-        className=""
-      />
+      <Navbar />
     </>
   );
 }

@@ -1,6 +1,15 @@
 import { useTaskStore } from "../lib/store";
 
-export default function Task({ id, title, description, status }) {
+export default function Task({
+  id,
+  title,
+  description,
+  status,
+  priority,
+  tags,
+  deadline,
+  assignee,
+}) {
   const dragTask = useTaskStore((state) => state.dragTask);
   const deleteTask = useTaskStore((state) => state.deleteTask);
 

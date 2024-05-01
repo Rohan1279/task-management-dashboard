@@ -15,6 +15,14 @@ module.exports = {
       fontFamily: {
         comfortaa: ["var(--font-comfortaa)", "sans-serif"],
       },
+      colors: {
+        accent: `#DDBEA9`,
+        "accent-dark": `#CB997E`,
+        "accent-light": "#FFE8D6",
+        secondary: "#A5A58D",
+        "secondary-dark": "#6B705C",
+        "secondary-light": "#B7B7A4",
+      },
     },
   },
   plugins: [],
