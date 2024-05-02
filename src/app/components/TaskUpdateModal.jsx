@@ -122,7 +122,7 @@ export default function TaskUpdateModal({ ...props }) {
   return (
     <>
       <Modal
-        title="Add new todo"
+        title="Update Task"
         open={isOpen}
         // onOk={handleOk}
         confirmLoading={confirmLoading}

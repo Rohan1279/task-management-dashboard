@@ -1,3 +1,4 @@
+"use client";
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -6,6 +7,7 @@ import {
   HomeFilled,
   PlusCircleFilled,
   ProductFilled,
+  SlackSquareOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { useTaskStore } from "../lib/store";
@@ -69,6 +71,18 @@ const Navbar = () => {
           icon: <UserOutlined />,
         },
       ],
+    },
+    {
+      label: "Boards",
+      key: "boards",
+      icon: <SlackSquareOutlined />,
+      children: projects.map((project) => ({
+        label: project.title,
+        key: project.id,
+        onClick: () => {
+          router.push(`/boards/${project.id}`);
+        },
+      })),
     },
   ];
   return (

@@ -19,6 +19,7 @@ export default function Task({
   const dragTask = useTaskStore((state) => state.dragTask);
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const options = [
     {
       value: "purple",
@@ -51,7 +52,7 @@ export default function Task({
         isOpen={isUpdateModalOpen}
         setIsOpen={setIsUpdateModalOpen}
       />
-      {/* <TaskDetailModal
+      <TaskDetailModal
         id={id}
         title={title}
         description={description}
@@ -60,11 +61,11 @@ export default function Task({
         tags={tags}
         deadline={deadline}
         assignee={assignee}
-        isModalOpen={isUpdateModalOpen}
-        setIsModalOpen={setIsUpdateModalOpen}
-      /> */}
+        isOpen={isDetailModalOpen}
+        setIsOpen={setIsDetailModalOpen}
+      />
       <div
-        className="relative group flex cursor-move items-start justify-between rounded-lg border px-3 py-2 text-gray-900 "
+        className="relative group flex cursor-move items-start justify-between rounded-lg border px-3 py-2 text-gray-900  bg-white"
         onDragStart={() => dragTask(id)}
         draggable
       >
@@ -111,7 +112,10 @@ export default function Task({
         </div>
 
         <div className="flex gap-x-1 justify-end opacity-0 group-hover:opacity-100 transition-all">
-          <SearchOutlined className="cursor-pointer" />
+          <SearchOutlined
+            onClick={() => setIsDetailModalOpen(true)}
+            className="cursor-pointer"
+          />
           <EditOutlined onClick={() => setIsUpdateModalOpen(true)} />
           <button className="cursor-pointer" onClick={() => deleteTask(id)}>
             <svg
