@@ -1,6 +1,6 @@
 import { Comfortaa, Inter } from "next/font/google";
 import "./globals.css";
-import Provider from "./utils/providers";
+import Provider from "../app/utils/Providers";
 const comfortaa = Comfortaa({
   subsets: ["latin"],
   variable: "--font-comfortaa",
