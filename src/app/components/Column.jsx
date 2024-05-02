@@ -1,7 +1,7 @@
 "use client";
 import { Reorder } from "framer-motion";
 import { useTaskStore } from "../lib/store";
-import Task from "./task";
+import Task from "../components/Task";
 import { useEffect, useMemo, useState } from "react";
 
 export default function Column({ title, status, projectId }) {
