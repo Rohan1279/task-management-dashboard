@@ -1,6 +1,6 @@
 import { Comfortaa, Inter } from "next/font/google";
 import "./globals.css";
-
+import Provider from "./utils/providers";
 const comfortaa = Comfortaa({
   subsets: ["latin"],
   variable: "--font-comfortaa",
@@ -13,7 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${comfortaa.variable} font-sans`}>{children}</body>
+      <body className={`${comfortaa.variable} font-sans`}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

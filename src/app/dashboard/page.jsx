@@ -23,6 +23,7 @@ const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [projectId, setProjectId] = useState(null);
+
   return (
     <div className="flex h-screen bg-accent-light/20 w-full ">
       <Navbar />

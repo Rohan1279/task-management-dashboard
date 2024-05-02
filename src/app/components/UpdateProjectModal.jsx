@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTaskStore } from "../lib/store";
-import { Button, Modal, Input, Form, Select, Tag, DatePicker } from "antd";
+import { Button, Modal, Input, Form, Select, Tag, DatePicker, message } from "antd";
 const { TextArea } = Input;
 
 export default function UpdateProjectModal({ projectId, open, setOpen }) {
@@ -30,6 +30,7 @@ export default function UpdateProjectModal({ projectId, open, setOpen }) {
     }
 
     updateProject(projectId, title, description, members);
+    message.success("Update successful");
     form.resetFields();
     setOpen(false);
   };

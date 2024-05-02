@@ -61,6 +61,8 @@ export const useTaskStore = create(
         //   ],
         // },
       ],
+
+      setProjects: (projects) => set(projects),
       members: [
         {
           name: "🧔🏻‍♂️ fairuj",
