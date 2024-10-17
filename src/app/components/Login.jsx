@@ -17,7 +17,7 @@ const LoginForm = () => {
     } else {
       login(username);
       router.push("/dashboard");
-      message.success("Login successful");
+      message.success("Sign up successful");
     }
   };
 
@@ -51,7 +51,7 @@ const LoginForm = () => {
             remarkable organization and efficiency. ??
           </span>
           <h1 className="text-2xl font-comfortaa font-bold mb-5 block mt-3">
-            Login
+            Sign Up
           </h1>
           <Form.Item
             label="Username"
